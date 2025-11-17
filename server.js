@@ -11,6 +11,8 @@ dotenv.config();
 
 const app = express();
 
+app.set('trust proxy', true);
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -39,6 +41,6 @@ const MONGODB_URI = process.env.MONGODB_URI;
 mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('MongoDB connected');
-    app.listen(PORT, () => console.log(`Server listening on http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
   })
   .catch((err) => console.error('Mongo connection error:', err));

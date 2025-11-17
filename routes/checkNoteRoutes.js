@@ -3,10 +3,24 @@ import Drawing from '../models/Drawing.js';
 
 const router = express.Router();
 
+// Same helper as in postDrawing.js
+function getClientIp(req) {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  return req.ip || req.socket.remoteAddress;
+}
+
 router.get('/', async (req, res) => {
-  const userIp = req.ip;
   try {
+    const userIp = getClientIp(req);
+    console.log('[CHECK-DRAWING] IP:', userIp);
+
     const existingDrawing = await Drawing.findOne({ ipAddress: userIp });
+
+    console.log('[CHECK-DRAWING] Found?', !!existingDrawing);
+
     if (existingDrawing) {
       return res.status(200).json({ hasPosted: true });
     } else {

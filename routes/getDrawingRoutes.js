@@ -6,8 +6,20 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    // Fetch 10 random drawings
-    const drawings = await Drawing.aggregate([{ $sample: { size: 10 } }]);
+    const drawings = await Drawing.aggregate([
+      { $sample: { size: 10 } },
+      {
+        $project: {
+          name: 1,
+          message: 1,
+          imageUrl: 1,
+          createdAt: 1,
+          // explicitly hide ipAddress
+          ipAddress: 0,
+          updatedAt: 1,
+        },
+      },
+    ]);
     return res.status(200).json(drawings);
   } catch (error) {
     console.error("Error fetching random drawings:", error);
