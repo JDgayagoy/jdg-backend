@@ -1,14 +1,15 @@
 import mongoose from 'mongoose';
 
-const DrawingSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  message: { type: String, required: true },
-  imageUrl: { type: String, required: true },
-  ipAddress: { type: String, required: true },
-}, {
-  timestamps: true, // Automatically add createdAt/updatedAt timestamps
-});
+const drawingSchema = new mongoose.Schema(
+  {
+    name: { type: String, default: 'Anonymous' },
+    message: { type: String, required: true },
+    imageUrl: { type: String, required: true },
+    ipAddress: { type: String, required: true }, // used for IP check
+  },
+  { timestamps: true }
+);
 
-const Drawing = mongoose.model('Drawing', DrawingSchema);
+const Drawing = mongoose.model('Drawing', drawingSchema);
 
 export default Drawing;

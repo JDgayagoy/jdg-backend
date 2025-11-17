@@ -3,7 +3,6 @@ import Drawing from '../models/Drawing.js';
 
 const router = express.Router();
 
-// Same helper as in postDrawing.js
 function getClientIp(req) {
   const forwarded = req.headers['x-forwarded-for'];
   if (forwarded) {
