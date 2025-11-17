@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cloudinary from 'cloudinary';
 
-import drawingRoutes from './routes/postDrawing.js';      // POST /api/postDrawing
+import drawingRoutes from './routes/drawingRoutes.js';      // POST /api/postDrawing
 import drawings from './routes/getDrawingRoutes.js';      // GET /api/getDrawings
 import checkNoteRoute from './routes/checkNoteRoutes.js'; // GET /api/check-drawing
 import spotifyRoute from './routes/spotifyRoutes.js';
