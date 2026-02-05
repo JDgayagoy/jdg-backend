@@ -10,6 +10,9 @@ const drawingSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// index IP address for fast existence checks
+drawingSchema.index({ ipAddress: 1 });
+
 const Drawing = mongoose.model('Drawing', drawingSchema);
 
 export default Drawing;

@@ -16,15 +16,10 @@ router.get('/', async (req, res) => {
     const userIp = getClientIp(req);
     console.log('[CHECK-DRAWING] IP:', userIp);
 
-    const existingDrawing = await Drawing.findOne({ ipAddress: userIp });
-
+    // only need existence — keep query light
+    const existingDrawing = await Drawing.findOne({ ipAddress: userIp }).select('_id').lean();
     console.log('[CHECK-DRAWING] Found?', !!existingDrawing);
-
-    if (existingDrawing) {
-      return res.status(200).json({ hasPosted: true });
-    } else {
-      return res.status(200).json({ hasPosted: false });
-    }
+    return res.status(200).json({ hasPosted: !!existingDrawing });
   } catch (error) {
     console.error('Error checking drawing:', error);
     return res.status(500).json({ error: 'Internal Server Error' });

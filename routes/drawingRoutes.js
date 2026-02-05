@@ -26,7 +26,8 @@ router.post('/', async (req, res) => {
     const clientIp = getClientIp(req);
     console.log('[POST-DRAWING] IP:', clientIp);
 
-    const existingDrawing = await Drawing.findOne({ ipAddress: clientIp });
+    // only need to know if a document exists -> select _id and return a plain object
+    const existingDrawing = await Drawing.findOne({ ipAddress: clientIp }).select('_id').lean();
 
     if (existingDrawing) {
       return res.status(403).json({
