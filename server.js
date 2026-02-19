@@ -9,6 +9,7 @@ import drawingRoutes from './routes/drawingRoutes.js';      // POST /api/postDra
 import drawings from './routes/getDrawingRoutes.js';      // GET /api/getDrawings
 import checkNoteRoute from './routes/checkNoteRoutes.js'; // GET /api/check-drawing
 import spotifyRoute from './routes/spotifyRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use('/api/spotify', spotifyRoute);
 app.use('/api/getDrawings', drawings);
 app.use('/api/postDrawing', drawingRoutes);
 app.use('/api/check-drawing', checkNoteRoute);
+app.use('/api/contact', contactRoutes);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
