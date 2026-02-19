@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cloudinary from 'cloudinary';
+import compression from 'compression';
 
 import drawingRoutes from './routes/drawingRoutes.js';      // POST /api/postDrawing
 import drawings from './routes/getDrawingRoutes.js';      // GET /api/getDrawings
@@ -21,6 +22,8 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+app.use(compression());
 
 app.use(
   cors({
